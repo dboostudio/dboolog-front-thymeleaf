@@ -46,8 +46,7 @@ $("#submit").on('click', function(){
         });
 
     // 계정 생성 요청
-    const create_account_url = "/api/account";
-    post(create_account_url, param
+    post(account_url, param
         ,function(result){
             alert("회원가입이 정상적으로 완료되었습니다! 자동 로그인 됩니다.")
             let userInfo = {

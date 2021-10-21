@@ -2,17 +2,7 @@ $("#login-button").on("click", function(){
     let param={};
     param['userId'] = $("#userId").val();
     param['password'] = $("#password").val();
-    post("/api/account/login", param,
-        function(){ location.href = "/"; }
-        ,function(response) {
-            hide_input_validation_error();
-            if (check_object_type(response) == "Array") {
-                show_input_validation_error(response);
-            } else {
-                console.log(response);
-            }
-        }
-    )
+    post_login(param);
 })
 
 $(document).on('keydown', '#password', function(event){

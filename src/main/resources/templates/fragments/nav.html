@@ -31,9 +31,9 @@
                     </li>
                 </ul>
                 <div class="mx-3 d-flex justify-content-center">
-                    <a type="form-control button" class="btn btn-outline-light me-2" sec:authorize="!isAuthenticated()" th:href="@{/view/login}">로그인</a>
-                    <a type="form-control button" class="btn btn-warning" sec:authorize="!isAuthenticated()" th:href="@{/view/sign-up}">회원가입</a>
-                    <div class="dropdown" sec:authorize="isAuthenticated()">
+                    <a type="form-control button" class="btn btn-outline-light me-2" th:href="@{/view/login}">로그인</a>
+                    <a type="form-control button" class="btn btn-warning" th:href="@{/view/sign-up}">회원가입</a>
+                    <div class="dropdown">
                         <a class="dropdown-toggle btn btn-dark" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown">내 정보</a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown">
                             <li><a class="dropdown-item" href="${/view/profile}">프로필</a></li>

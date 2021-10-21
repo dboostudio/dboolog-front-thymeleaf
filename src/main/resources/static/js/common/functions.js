@@ -1,23 +1,24 @@
-var header = $("meta[name='_csrf_header']").attr('content');
-var token = $("meta[name='_csrf']").attr('content');
+// var header = $("meta[name='_csrf_header']").attr('content');
+// var token = $("meta[name='_csrf']").attr('content');
 
 /**
  * POST 요청
- * @param url <String> 요청url
+ * @param url <String> 요청 url
  * @param json <JSON> 파라미터
  * @param success <Function>(<JSON>Response) 성공시 수행할 함수
  * @param error <Function>(<JSON>Response) 에러시 수행할 함수
  * @param beforeSend <Function> 요청 전 수행할 함수 (디폴트로 csrf토큰을 붙이도록 정의되어 있음)
- * @param complete <Function> success함수가 끝난후 수행할 함수
+ * @param complete <Function> success 함수가 끝난후 수행할 함수
  */
 function post(url, json, success, error, beforeSend, complete){
     $.ajax({
+        crossOrigin: true,
         type: 'POST',
         contentType: 'application/json;charset=UTF-8',
         url: url,
         data: JSON.stringify(json),
         beforeSend : function (xhr) {
-            xhr.setRequestHeader(header, token)
+            xhr.setRequestHeader("Access-Control-Allow-Origin", "*")
             if('function' === typeof (beforeSend)){
                 beforeSend();
             }
@@ -44,19 +45,20 @@ function post(url, json, success, error, beforeSend, complete){
 
 /**
  * GET 요청
- * @param url <String> 요청url
+ * @param url <String> 요청 url
  * @param success <Function>(Response) 성공시 수행할 함수
  * @param error <Function>(xmlHttpRequest, textStatus, errorShown) 에러시 수행할 함수
  * @param beforeSend <Function> 요청 전 수행할 함수
- * @param complete <Function> success함수가 끝난후 수행할 함수
+ * @param complete <Function> success 함수가 끝난후 수행할 함수
  */
 function get(url, success, error, beforeSend, complete){
     $.ajax({
+        crossOrigin: true,
         type: 'GET',
         contentType: 'application/json;charset=UTF-8',
         url: url,
         beforeSend : function (xhr) {
-            xhr.setRequestHeader(header, token)
+            xhr.setRequestHeader("Access-Control-Allow-Origin", "*")
             if('function' === typeof (beforeSend)){
                 beforeSend();
             }
@@ -133,17 +135,6 @@ function validation_email(email){
         return false;
     }
     return true;
-}
-
-/**
- * 로그인 요청을 보낸다.
- * @param userInfO <JSON> "userId" : "유저이메일아이디", "password" : "패스워드"
- */
-function post_login(userInfo){
-    let login_url = "/api/account/login";
-    post(login_url, userInfo, function(){
-        location.href = "/";
-    })
 }
 
 /**
